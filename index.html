@@ -31,7 +31,7 @@
             margin-right: 20px; /* Spazio tra immagine e testo */
         }
 	.scrolling-text {
-    	    border: 1px solid red;
+    	    border: 2px solid red;
             max-height: 400px;
             overflow: hidden;
             position: relative;
@@ -39,7 +39,10 @@
 	}
         .text-content {
             position: absolute;
-            animation: scroll-up linear infinite;
+	    top: 0;
+	    left:0;
+	    white-space: nowrap;
+            animation: scroll-up 10s linear infinite;
         }
         @keyframes scroll-up {
     		0% {
@@ -68,15 +71,17 @@
 	</audio>
 <script>
     // Seleziona gli elementi audio e testo
-    const audio = document.getElementById('audio');
-    const textContent = document.querySelector('.text-content');
+	audio.addEventListener('loadedmetadata', () => {
+    		const duration = audio.duration;
+    		console.log(`Durata audio: ${duration}s`);
+    		const textContent = document.querySelector('.text-content');
+    		const scrollingText = document.querySelector('.scrolling-text');
 
-    // Quando i metadati dell'audio sono caricati, sincronizza la durata dell'animazione
-    audio.addEventListener('loadedmetadata', () => {
-        const duration = audio.duration;
-        console.log(`Durata audio: ${duration}s`); // Log per verificare la durata
-        textContent.style.animationDuration = `${duration}s`; // Sincronizza durata animazione
-    });
-</script>
+    // Calcola dinamicamente la durata dell'animazione
+    	textContent.style.animationDuration = `${duration}s`;
+
+    // Assicura che il contenitore del testo sia visibile
+    	scrollingText.style.height = `${textContent.scrollHeight}px`;
+});</script>
 </body>
 </html>
