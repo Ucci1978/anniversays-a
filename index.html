@@ -5,64 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Il Destino sei tu</title>
     <style>
-        .scrolling-text {
-            display: block;
-            white-space: nowrap;
-            overflow: hidden;
-            box-sizing: border-box;
-            animation: scroll-left 10s linear infinite;
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-
-        @keyframes scroll-left {
+        .container {
+            display: flex;
+            align-items: center;
+        }
+        .cover {
+            max-width: 200px; /* Dimensioni regolabili della copertina */
+            margin-right: 20px; /* Spazio tra immagine e testo */
+        }
+        .scrolling-text {
+            max-height: 400px; /* Altezza del contenitore per il testo */
+            overflow: hidden;
+            position: relative;
+            width: 300px; /* Larghezza del contenitore per il testo */
+        }
+        .text-content {
+            position: absolute;
+            white-space: nowrap;
+            animation: scroll-up linear infinite;
+        }
+        @keyframes scroll-up {
             0% {
-                transform: translateX(100%);
+                transform: translateY(100%);
             }
             100% {
-                transform: translateX(-100%);
+                transform: translateY(-100%);
             }
         }
     </style>
 </head>
 <body>
     <h1>Il Destino sei tu</h1>
-    <img src="Copertina.jpg" alt="Copertina">
+     	<div class="container">
+		<img src="Copertina.jpg" alt="Copertina" class="cover">
+		<div class="scrolling-text">
+		<p class="text-content">Era l’estate del sedici, sotto un cielo denso di sogni, tra dubbi e tempeste, eravamo soli, ma insieme più forti. Hanno parlato 					in tanti, ci hanno detto "non ce la faranno", ma tu ed io, mano nella mano, abbiamo riscritto ogni piano. Con Leonardo ed 					Ettore, stelle nel nostro cammino, la famiglia che abbiamo creato, il nostro vero destino. Sara, tu sei il sereno dopo ogni 					tempesta, l’amore che resta, che mi salva e mi desta. Il destino non è un caso, ma il tuo nome scritto nel mio, in ogni giorno, 					in ogni addio. E il 24 dicembre, come una promessa, la festa della famiglia, il nostro "per sempre" che resta. Serendipità, il 					tuo sorriso che mi ha trovato, quando tutto sembrava lontano, eri già il mio faro amato. Abbiamo costruito un castello con i 					mattoni dell’impegno, un amore che lotta, che vince ogni segno. Leo ed Ettore, il cuore che batte due volte, un futuro che 					insieme dipingiamo nelle notti più colte. Sara, tu sei il sereno dopo ogni tempesta, l’amore che resta, che mi salva e mi 					desta. Il destino non è un caso, ma il tuo nome scritto nel mio, in ogni giorno, in ogni addio. E il 24 dicembre, come una 					promessa, la festa della famiglia, il nostro "per sempre" che resta. E anche se la vita non è una favola, lo sappiamo, ogni 					giorno insieme il "felici e contenti" lo creiamo. Ci siamo scelti contro ogni bufera, Sara, sei la mia luce, la mia vita 					sincera. Sara, amore mio, il destino sei tu, il sereno che cerco nel cielo più blu. Con Leonardo ed Ettore, la nostra sinfonia, 					una vita insieme, questa è la mia poesia. .</p>
+      </div>
+ 		</div>
     <audio controls>
         <source src="2 - Il Destino Sei Tu.mp3" type="audio/mpeg">
         Il tuo browser non supporta l'elemento audio.
     </audio>
-    <div class="scrolling-text">
-        <p>Era l’estate del sedici, sotto un cielo denso di sogni, </p>
-	<p>tra dubbi e tempeste, eravamo soli, ma insieme più forti. </p>
-	<p>Hanno parlato in tanti, ci hanno detto "non ce la faranno",</p>
-	<p>ma tu ed io, mano nella mano, abbiamo riscritto ogni piano. </p>
-	<p>Con Leonardo ed Ettore, stelle nel nostro cammino, </p>
-	<p>la famiglia che abbiamo creato, il nostro vero destino. </p>
-	<p>Sara, tu sei il sereno dopo ogni tempesta, </p>
-	<p>l’amore che resta, che mi salva e mi desta. </p>
-	<p>Il destino non è un caso, ma il tuo nome scritto nel mio, </p>
-	<p>in ogni giorno, in ogni addio. </p>
-	<p>E il 24 dicembre, come una promessa, </p>
-	<p>la festa della famiglia, il nostro "per sempre" che resta. </p>
-	<p>Serendipità, il tuo sorriso che mi ha trovato, </p>
-	<p>quando tutto sembrava lontano, eri già il mio faro amato. </p>
-	<p>Abbiamo costruito un castello con i mattoni dell’impegno, </p>
-	<p>un amore che lotta, che vince ogni segno. </p>
-	<p>Leo ed Ettore, il cuore che batte due volte, </p>
-	<p>un futuro che insieme dipingiamo nelle notti più colte. </p>
-	<p>Sara, tu sei il sereno dopo ogni tempesta, </p>
-	<p>l’amore che resta, che mi salva e mi desta. </p>
-	<p>Il destino non è un caso, ma il tuo nome scritto nel mio, </p>
-	<p>in ogni giorno, in ogni addio. </p>
-	<p>E il 24 dicembre, come una promessa, </p>
-	<p>la festa della famiglia, il nostro "per sempre" che resta. </p>
-	<p>E anche se la vita non è una favola, lo sappiamo, </p>
-	<p>ogni giorno insieme il "felici e contenti" lo creiamo. </p>
-	<p>Ci siamo scelti contro ogni bufera, </p>
-	<p>Sara, sei la mia luce, la mia vita sincera. </p>
-	<p>Sara, amore mio, il destino sei tu, </p>
-	<p>il sereno che cerco nel cielo più blu. </p>
-	<p>Con Leonardo ed Ettore, la nostra sinfonia, </p>
-	<p>una vita insieme, questa è la mia poesia. </p>
-    </div>
+    <script>
+        const audio = document.getElementById('audio');
+        const textContent = document.querySelector('.text-content');
+        const scrollingText = document.querySelector('.scrolling-text');
+
+        // Funzione per sincronizzare la durata dello scorrimento del testo con la durata della canzone
+        audio.addEventListener('loadedmetadata', () => {
+            const duration = audio.duration;
+            const textHeight = textContent.clientHeight;
+            const containerHeight = scrollingText.clientHeight;
+
+            // Durata dell'animazione uguale alla durata della canzone
+            textContent.style.animationDuration = `${duration}s`;
+
+            // Adatta la durata se il testo è più corto dell'area visibile
+            if (textHeight <= containerHeight) {
+                textContent.style.animationDuration = '10s'; // Default se il testo è breve
+            }
+        });
+    </script>
 </body>
 </html>
