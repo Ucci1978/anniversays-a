@@ -30,24 +30,26 @@
             max-width: 300px; /* Dimensioni regolabili della copertina */
             margin-right: 20px; /* Spazio tra immagine e testo */
         }
-        .scrolling-text {
-            max-height: 400px; /* Altezza del contenitore per il testo */
+	.scrolling-text {
+    	    border: 1px solid red;
+            max-height: 400px;
             overflow: hidden;
             position: relative;
-            width: 300px; /* Larghezza del contenitore per il testo */
-        }
+            width: 300px;
+	}
         .text-content {
             position: absolute;
             animation: scroll-up linear infinite;
         }
         @keyframes scroll-up {
-            0% {
-                transform: translateY(100%);
-            }
-            100% {
-                transform: translateY(-100%);
-            }
-        }
+    		0% {
+        	transform: translateY(100%);
+    		}
+    		100% {
+        	transform: translateY(-200%);
+    		}		
+}
+
     </style>
 </head>
 <body>
@@ -60,20 +62,21 @@
 		<p class="text-content">Era l’estate del sedici, sotto un cielo denso di sogni, tra dubbi e tempeste, eravamo soli, ma insieme più forti. Hanno parlato 					in tanti, ci hanno detto "non ce la faranno", ma tu ed io, mano nella mano, abbiamo riscritto ogni piano. Con Leonardo ed 					Ettore, stelle nel nostro cammino, la famiglia che abbiamo creato, il nostro vero destino. Sara, tu sei il sereno dopo ogni 					tempesta, l’amore che resta, che mi salva e mi desta. Il destino non è un caso, ma il tuo nome scritto nel mio, in ogni giorno, 					in ogni addio. E il 24 dicembre, come una promessa, la festa della famiglia, il nostro "per sempre" che resta. Serendipità, il 					tuo sorriso che mi ha trovato, quando tutto sembrava lontano, eri già il mio faro amato. Abbiamo costruito un castello con i 					mattoni dell’impegno, un amore che lotta, che vince ogni segno. Leo ed Ettore, il cuore che batte due volte, un futuro che 					insieme dipingiamo nelle notti più colte. Sara, tu sei il sereno dopo ogni tempesta, l’amore che resta, che mi salva e mi 					desta. Il destino non è un caso, ma il tuo nome scritto nel mio, in ogni giorno, in ogni addio. E il 24 dicembre, come una 					promessa, la festa della famiglia, il nostro "per sempre" che resta. E anche se la vita non è una favola, lo sappiamo, ogni 					giorno insieme il "felici e contenti" lo creiamo. Ci siamo scelti contro ogni bufera, Sara, sei la mia luce, la mia vita 					sincera. Sara, amore mio, il destino sei tu, il sereno che cerco nel cielo più blu. Con Leonardo ed Ettore, la nostra sinfonia, 					una vita insieme, questa è la mia poesia. .</p>
 		</div>
       </div>
-      <audio controls>
-          <source src="2 - Il Destino Sei Tu.mp3" type="audio/mpeg">
-        Il tuo browser non supporta l'elemento audio.
-      </audio>
-    <script>
-        const audio = document.getElementById('audio');
-        const textContent = document.querySelector('.text-content');
-        const scrollingText = document.querySelector('.scrolling-text');
+	<audio id="audio" controls>
+    		<source src="2 - Il Destino Sei Tu.mp3" type="audio/mpeg">
+    		Il tuo browser non supporta l'elemento audio.
+	</audio>
+<script>
+    // Seleziona gli elementi audio e testo
+    const audio = document.getElementById('audio');
+    const textContent = document.querySelector('.text-content');
 
-        // Sincronizza la durata dello scorrimento del testo con la durata della canzone
-        audio.addEventListener('loadedmetadata', () => {
-            const duration = audio.duration;
-            textContent.style.animationDuration = `${duration}s`;
-        });
-    </script>
+    // Quando i metadati dell'audio sono caricati, sincronizza la durata dell'animazione
+    audio.addEventListener('loadedmetadata', () => {
+        const duration = audio.duration;
+        console.log(`Durata audio: ${duration}s`); // Log per verificare la durata
+        textContent.style.animationDuration = `${duration}s`; // Sincronizza durata animazione
+    });
+</script>
 </body>
 </html>
